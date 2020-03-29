@@ -11,7 +11,7 @@ export default {
 
 <style scoped>
     .typewriter{
-        border-right: 2px solid var(--m-grey7);
+        border-right: 2px solid var(--text-color);
         white-space: nowrap;
         overflow: hidden;
         animation: typewriter 2s steps(30) 0s 1 normal both,
@@ -23,6 +23,6 @@ export default {
     }
     @keyframes blinkTextCursor{
         from{border-right-color: transparent;}
-        to{border-right-color: var(--m-grey7);}
+        to{border-right-color: var(--text-color);}
     }
 </style>
