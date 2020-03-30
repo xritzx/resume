@@ -14,8 +14,8 @@ export default {
         border-right: 2px solid var(--text-color);
         white-space: nowrap;
         overflow: hidden;
-        animation: typewriter 2s steps(30) 0s 1 normal both,
-                blinkTextCursor 500ms steps(50) 5 alternate-reverse forwards;
+        animation: typewriter 1s steps(30) 0s 1 normal both,
+                blinkTextCursor 200ms steps(50) 5 alternate-reverse forwards;
     }
     @keyframes typewriter{
         from{width: 0;}

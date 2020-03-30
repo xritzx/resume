@@ -6,7 +6,7 @@
           <ul class="m-navbar-nav text-center">
               <router-link tag="li" to="/" ><img class="brand" src="./assets/logo.png" alt=""></router-link>
               <router-link tag="li" to="/about" class="m-nav-item circle">🧬Me</router-link>
-              <router-link tag="li" to="/" class="m-nav-item circle">🕯️Projects</router-link>
+              <router-link tag="li" to="/projects" class="m-nav-item circle">🕯️Projects</router-link>
               <router-link tag="li" to="/about" class="m-nav-item circle">📖Blog</router-link>
               <li @click="changeTheme()" style="font-size:2em">{{emoji}}</li>
           </ul>
