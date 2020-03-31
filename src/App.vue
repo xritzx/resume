@@ -6,14 +6,14 @@
           <ul class="m-navbar-nav text-center">
               <router-link tag="li" to="/" ><img class="brand" src="./assets/logo.png" alt=""></router-link>
               <router-link tag="li" to="/about" class="m-nav-item circle">🧬Me</router-link>
-              <router-link tag="li" to="/projects" class="m-nav-item circle">🕯️Projects</router-link>
+              <router-link tag="li" to="/projects" class="m-nav-item circle">💡Projects</router-link>
               <router-link tag="li" to="/about" class="m-nav-item circle">📖Blog</router-link>
-              <li @click="changeTheme()" style="font-size:2em">{{emoji}}</li>
+              <li @click="changeTheme()" style="font-size:2em; cursor:help">{{emoji}}</li>
           </ul>
       </nav>
       <hr class="seperator" style="border: 1px solid var(--accent)">
   </section>
-  <section class="body">
+  <section>
     <router-view/>
   </section>
   </div>
@@ -60,7 +60,7 @@ export default {
      --m-grey6: #212121;
      --m-grey7: #111111;
 
-     --bg-white: #e9ebed;
+     --bg-white: #f0f0f0;
      --bg-black: #1f1f1f;
      --shadow-up-light: rgba(255, 255, 255, 0.9);
      --shadow-down-light: rgba(0, 0, 0, 0.2);
@@ -98,6 +98,15 @@ export default {
     list-style: none;
     transition: background 500ms ease-in-out, color 1000ms ease-in-out, box-shadow 500ms ease-in-out;
   }
+  *::-webkit-scrollbar {
+    width: 3px;
+    background: var(--bg);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: var(--b-radius);
+  }
 
   a{
     text-decoration: none;
@@ -116,6 +125,7 @@ export default {
 
   .m-nav-item {
     color: var(--text-color);
+    cursor: crosshair;
     font-size: 0.9em;
     padding: 1rem 1.618rem;
     display: flex;
@@ -139,6 +149,7 @@ export default {
                  3px 6px 10px 2px var(--shadow-down);
   }
   .seperator{
+    background: var(--text-color);
     margin: 1rem 0;
   }
   .round-edge{
@@ -170,7 +181,18 @@ export default {
       inset -3px -6px 4px 1px var(--shadow-up);
     animation: shadowFadeIn 0.05s;
   }
-
+  
+  .n-button{
+    background-color: var(--bg);
+    box-shadow: -3px -6px 10px 1px var(--shadow-up),
+                 3px 6px 10px 1px var(--shadow-down);
+      animation: shadowFadeOut 0.05s;
+  }
+  .n-button:active{
+    box-shadow: inset 3px 6px 4px 1px var(--shadow-down),
+      inset -3px -6px 4px 1px var(--shadow-up);
+    animation: shadowFadeIn 0.05s;
+  }
   @keyframes shadowFadeIn {
     0% {
       box-shadow: 0px -6px 10px 0px var(--shadow-up),

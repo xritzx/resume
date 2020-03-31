@@ -7,12 +7,12 @@
         <h4><Typewriter text="Lets connect 🔗" /></h4>
         <hr>
         <b-row class="text-center">
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.linkedin" ><fa :icon="['fab', 'linkedin']" size="2x"/></a></b-col>
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.twitter"><fa :icon="['fab', 'twitter']" size="2x" /></a></b-col>
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.github"><fa :icon="['fab', 'github']" size="2x" /></a></b-col>
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.medium"><fa :icon="['fab', 'medium']" size="2x" /></a></b-col>
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.instagram"><fa :icon="['fab', 'instagram']" size="2x" /></a></b-col>
-          <b-col cols=2 lg=8 class="p-2"><a :href="links.facebook"><fa :icon="['fab', 'facebook']" size="2x" /></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.linkedin" ><fa :icon="['fab', 'linkedin']" size="2x"/></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.twitter"><fa :icon="['fab', 'twitter']" size="2x" /></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.github"><fa :icon="['fab', 'github']" size="2x" /></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.medium"><fa :icon="['fab', 'medium']" size="2x" /></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.instagram"><fa :icon="['fab', 'instagram']" size="2x" /></a></b-col>
+          <b-col cols=2 lg=12 class="p-2"><a :href="links.facebook"><fa :icon="['fab', 'facebook']" size="2x" /></a></b-col>
         </b-row>
       </b-col>
 
@@ -45,8 +45,8 @@ export default {
   },
   created() {
     const db = firebase.database()
-    db.ref('/links').once('value').then(snapshot => this.links=snapshot.val());
-    db.ref('/home').once('value').then(snapshot => this.home=snapshot.val());
+    db.ref('/links').once('value').then(snapshot => this.links=snapshot.val())
+    db.ref('/home').once('value').then(snapshot => this.home=snapshot.val())
   }
 }
 </script>
