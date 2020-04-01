@@ -3,7 +3,7 @@
     <b-row class="m-1">
 
       <b-col lg=4 cols=0 class="text-center neumorphic round-edge mr-lg-5 mt-lg-2 mb-2 pt-lg-5 p-4">
-        <h4><Typewriter text="Stats"/></h4>
+        <h4><Typewriter text="Stats 📊"/></h4>
         <b-row>
           <b-col>
             <b-button><fa :icon="['fab', 'github']" class="round-edge" /> Followers {{ this.followers }}</b-button>
@@ -15,15 +15,15 @@
         <b-row>
           <b-col lg=12 cols=12><hr>Hobbies<hr style="background: var(--accent)"></b-col>
           <b-col lg=12 class="tile" cols=12 v-for="hobby of hobbies" :key="hobby">{{hobby}}</b-col>
-          <b-col lg=12 cols=12><hr>Change my Room Lights<hr style="background: var(--accent)"></b-col>
-          <b-col lg=4 cols=4 class="ml-2 p-2" align-item="center"><material-picker class="p-2 m-2 picker" v-model="color"/></b-col>
-          <b-col> My room lights </b-col>
+          <b-col lg=12 cols=12><hr>Change my Room's Light <br> <small>And I'll know you have been here</small><hr style="background: var(--accent)"></b-col>
+          <b-col lg=4 cols=4 class="ml-2 p-2" align-item="center"><material-picker class="p-2 m-2 picker" v-model="color" @input="updateLight"/></b-col>
+          <b-col><div class="circle" :style="setColor"></div></b-col>
         </b-row>
       </b-col>
 
       <b-col lg=7 class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4">
         <h4><Typewriter text="Hey, Good to see you here !"/></h4>
-        <b-img rounded="circle" fluid :src="this.avatar" alt="Image 1"></b-img>
+        <b-img rounded="circle" :src="this.avatar" fluid alt="Oh snap 💩, am not visible !"></b-img>
         <hr class="seperator">
         <p>{{ this.about }} </p>
       </b-col>
@@ -36,6 +36,7 @@
 import Typewriter from "../components/Typewriter"
 import axois from 'axios'
 import firebase from 'firebase/app'
+let db
 
 export default {
   name: 'About',
@@ -52,8 +53,27 @@ export default {
       color: { r: 0, g: 0, b: 0 }
     }
   },
+  methods: {
+    updateLight(){
+      let data = this.color.rgba;
+      data = {'r':data.r, 'g':data.g, 'b':data.b}
+      console.log(data);
+      db.ref('/light').set(data).then(ele=>console.log(ele)) 
+    }
+  },
+  computed: {
+    setColor(){
+      let color = this.color;
+      color = `
+        background: rgba(${color.r}, ${color.g}, ${color.b}, 0.7);
+        box-shadow: -3px -6px 10px 1px rgba(${color.r}, ${color.g}, ${color.b}, 1),
+                 3px 6px 10px 1px rgba(${color.r}, ${color.g}, ${color.b}, 0.5);
+        ` 
+      return color
+    }
+  },
   created(){
-    const db = firebase.database()
+    db = firebase.database()
     let repos = sessionStorage.getItem('repos')
     let followers = sessionStorage.getItem('followers')
     let avatar = sessionStorage.getItem('avatar')
@@ -73,7 +93,7 @@ export default {
         this.followers = res.data.followers
         this.repos = res.data.public_repos
         this.avatar = res.data.avatar_url
-        console.log(this.avatar_url);
+        console.log(this.avatar);
         
         sessionStorage.setItem('followers', this.followers)
         sessionStorage.setItem('repos', this.repos)
@@ -90,6 +110,7 @@ export default {
 
     db.ref('/about').once('value').then(snapshot => this.about=snapshot.val())
     db.ref('/hobbies').once('value').then(snapshot => this.hobbies=snapshot.val())
+    db.ref('/light').on('value', snapshot => this.color=snapshot.val())
   }
 }
 </script>

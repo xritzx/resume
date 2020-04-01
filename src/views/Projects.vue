@@ -7,42 +7,66 @@
         <h4><Typewriter text="Skills 🛠️ I 👜" /></h4>
         <hr style="background: var(--accent)">
         <b-row class="neumorphic m-3 round-edge m-lg-3 p-3 p-lg-3">
-          <b-col lg=12 cols=12><hr>Competencies<hr style="background: var(--accent)"></b-col>
+          <b-col lg=12 cols=12><hr>Competencies 🔧<hr style="background: var(--accent)"></b-col>
           <b-col lg=12 class="tile" cols=12 v-for="skill of skills" :key="skill" v-html="skill">{{skill}}</b-col>
-          <b-col lg=12 cols=12><hr>Languages<hr style="background: var(--accent)"></b-col>
+          <b-col lg=12 cols=12><hr>Languages #️⃣<hr style="background: var(--accent)"></b-col>
           <b-col lg=12 class="tile" cols=12 v-for="language of languages" :key="language" v-html="language">{{language}}</b-col>
         </b-row>
       </b-col>
-      <b-col lg=6 class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4">
-        <h4><Typewriter text="Projects that are 🔥"/></h4>
-        <hr class="seperator">
-        <b-row cols=12 lg=6>
-            <b-col>
+
+      <b-col lg=6 cols=12 class="round-edge neumorphic mr-lg-4 mt-lg-2 mb-2 pt-lg-5 p-3 mt-2">
+        <h4><Typewriter text="Work Experiences 👨‍💻" /></h4>
+        <hr style="background: var(--accent)">
+        <b-row class="neumorphic m-1 round-edge m-lg-3 p-3 p-lg-3">
+          <b-col lg=12 cols=12><hr>Internships 💻<hr style="background: var(--accent)"></b-col>
+            <b-row cols=12 lg=8>
+              <b-col>
                 <b-card
-                  class="overflow-hidden mb-3"
-                  style="max-width: 500px; border:none; background:#00000000"
-                  v-for="project of projects" :key="project.source"
+                  class="overflow-hidden mb-2"
+                  style="max-width: 600px; border:none; background:#00000000"
+                  v-for="internship of internships" :key="internship.company"
                 >
-                  <a :href="project.source">
                   <b-row no-gutters>
-                    
                     <b-col lg="12">
-                      <b-card-body :title="project.title" class="un neumorphic round-edge p-4 n-button">
+                      <b-card-body :title="internship.company" class="round-edge p-3 n-button">
                         <b-card-text>
-                          <fa :icon="['fab', 'github']" class="round-edge" />
-                          {{ project.description }}
+                          <h5><em>{{ internship.year }} {{ internship.season }} ({{internship.duration}})</em></h5>
+                          <em style="border-bottom: 0.7px solid var(--accent)">{{ internship.role }}</em> <br><br>
+                          {{ internship.description }}
                         </b-card-text>
                       </b-card-body>
                     </b-col>
                   </b-row>
-                  </a>
-                </b-card>
-              
-            </b-col>
+                </b-card> 
+              </b-col>
+            </b-row>
         </b-row>
       </b-col>
-    
     </b-row>
+    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4 mx-1">
+        <b-col cols=12 lg=12><h4><Typewriter text="Projects that are 🔥"/></h4>
+        <hr class="seperator"></b-col>
+        <b-col lg=6 cols=12 v-for="project of projects" :key="project.source">
+            <b-card
+              class="overflow-hidden mb-3 p-0"
+              style="max-width: 500px; border:none; background:#00000000; display:flex"
+            >
+              <a :href="project.source">
+              <b-row no-gutters>
+                <b-col lg="12">
+                  <b-card-body :title="project.title" class="un neumorphic round-edge p-4 n-button">
+                    <b-card-text>
+                      <hr style="background: var(--accent)">
+                      <fa :icon="['fab', 'github']" class="round-edge" />
+                      {{ project.description }}
+                    </b-card-text>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+              </a>
+            </b-card>
+          </b-col>
+      </b-row>
 
   </b-container>
 
@@ -62,6 +86,7 @@ export default {
       skills: [],
       languages: [],
       projects: [],
+      internships: [],
     }
   },
 
@@ -70,6 +95,8 @@ export default {
     db.ref('/skills/skill').once('value').then(snapshot => this.skills=snapshot.val())
     db.ref('/skills/languages').once('value').then(snapshot => this.languages=snapshot.val())
     db.ref('/projects').once('value').then(snapshot => this.projects=snapshot.val())
+    db.ref('/internships').once('value').then(snapshot => this.internships=snapshot.val())
+    
   }
 }
 </script>
