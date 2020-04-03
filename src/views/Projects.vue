@@ -8,13 +8,15 @@
         <hr style="background: var(--accent)">
         <b-row class="neumorphic m-3 round-edge m-lg-3 p-3 p-lg-3">
           <b-col lg=12 cols=12><hr>Competencies 🔧<hr style="background: var(--accent)"></b-col>
-          <b-col lg=12 class="tile" cols=12 v-for="skill of skills" :key="skill" v-html="skill">{{skill}}</b-col>
+          <b-col lg=12 class="tile mt-lg-2" cols=12 v-for="skill of skills" :key="skill" v-html="skill">{{skill}}</b-col>
+        </b-row>
+        <b-row class="neumorphic m-3 round-edge m-lg-3 p-3 p-lg-3">
           <b-col lg=12 cols=12><hr>Languages #️⃣<hr style="background: var(--accent)"></b-col>
-          <b-col lg=12 class="tile" cols=12 v-for="language of languages" :key="language" v-html="language">{{language}}</b-col>
+          <b-col lg=12 class="tile mt-lg-2" cols=12 v-for="language of languages" :key="language" v-html="language">{{language}}</b-col>
         </b-row>
       </b-col>
 
-      <b-col lg=6 cols=12 class="round-edge neumorphic mr-lg-4 mt-lg-2 mb-2 pt-lg-5 p-3 mt-2">
+      <b-col lg=6 cols=12 class="round-edge neumorphic mt-lg-2 mb-2 pt-lg-5 p-3 mt-2">
         <h4><Typewriter text="Work Experiences 👨‍💻" /></h4>
         <hr style="background: var(--accent)">
         <b-row class="neumorphic m-1 round-edge m-lg-3 p-3 p-lg-3">
@@ -32,7 +34,7 @@
                         <b-card-text>
                           <h5><em>{{ internship.year }} {{ internship.season }} ({{internship.duration}})</em></h5>
                           <em style="border-bottom: 0.7px solid var(--accent)">{{ internship.role }}</em> <br><br>
-                          {{ internship.description }}
+                          <vue-markdown :source="internship.description" />
                         </b-card-text>
                       </b-card-body>
                     </b-col>
@@ -58,7 +60,7 @@
                     <b-card-text>
                       <hr style="background: var(--accent)">
                       <fa :icon="['fab', 'github']" class="round-edge" />
-                      {{ project.description }}
+                        <vue-markdown :source="project.description" @rendered="update" />
                     </b-card-text>
                   </b-card-body>
                 </b-col>
@@ -75,6 +77,9 @@
 <script>
 import Typewriter from "../components/Typewriter"
 import firebase from 'firebase/app'
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";  // theme
+import 'prismjs/components/prism-go.min'; 
 
 export default {
   name: 'Projects',
@@ -89,7 +94,15 @@ export default {
       internships: [],
     }
   },
-
+  methods: {
+    update: function() {
+      this.$nextTick(() => {
+        console.log("Updated");
+        
+        Prism.highlightAll();
+      });
+    }
+  },
   created(){
     const db = firebase.database()
     db.ref('/skills/skill').once('value').then(snapshot => this.skills=snapshot.val())

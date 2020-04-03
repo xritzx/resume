@@ -4,8 +4,8 @@
     <b-row class="m-1">
 
       <b-col lg=3 cols=0 class=" text-center round-edge neumorphic mr-lg-5 mt-lg-2 mb-2 pt-lg-5 p-4">
-        <h4><Typewriter text="Lets connect 🔗" /></h4>
-        <hr>
+        <h4><Typewriter text="Socials 🔗" /></h4>
+        <hr style="background: var(--accent)">
         <b-row class="text-center">
           <b-col cols=2 lg=12 class="p-2"><a :href="links.linkedin" ><fa :icon="['fab', 'linkedin']" size="2x"/></a></b-col>
           <b-col cols=2 lg=12 class="p-2"><a :href="links.twitter"><fa :icon="['fab', 'twitter']" size="2x" /></a></b-col>

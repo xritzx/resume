@@ -3,17 +3,19 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Projects from '../views/Projects.vue'
 import About from '../views/About.vue'
+import Blogs from '../views/Blogs.vue'
+import Blog from '../views/Blog.vue'
 
 Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: About,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -22,12 +24,24 @@ const routes = [
   },
   {
     path:'/projects',
-    name: 'Projects',
+    name: 'projects',
     component: Projects,
+  },
+  {
+    path:'/blogs',
+    name: 'blogs',
+    component: Blogs,
+  },
+  {
+    path:'/blog/:id',
+    name: 'blog',
+    component: Blog,
+    props: true
   }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

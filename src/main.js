@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueMarkdown from 'vue-markdown'
 import BootstrapVue from 'bootstrap-vue'
 import { Material } from 'vue-color'
 import firebase from 'firebase/app'
@@ -31,6 +32,7 @@ firebase.analytics();
 library.add(faUserSecret, faFacebook, faInstagram, faTwitter, faLinkedin, faGithub, faMedium) 
 Vue.component('fa', FontAwesomeIcon)
 Vue.component('material-picker', Material)
+Vue.component('vue-markdown', VueMarkdown)
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)

@@ -4,10 +4,10 @@
   <section>
       <nav class="m-nav neumorphic mx-lg-5 px-lg-5 my-lg-4 mt-3">
           <ul class="m-navbar-nav text-center">
-              <router-link tag="li" to="/" ><img class="brand" src="./assets/logo.png" alt=""></router-link>
-              <router-link tag="li" to="/about" class="m-nav-item circle">🧬Me</router-link>
-              <router-link tag="li" to="/projects" class="m-nav-item circle">💡Projects</router-link>
-              <router-link tag="li" to="/about" class="m-nav-item circle">📖Blog</router-link>
+              <router-link tag="li" :to="{name: 'home'}" ><img class="brand" src="./assets/logo.png" alt=""></router-link>
+              <router-link tag="li" :to="{name: 'about'}" class="m-nav-item circle">🧬Me</router-link>
+              <router-link tag="li" :to="{name: 'projects'}" class="m-nav-item circle">💡Projects</router-link>
+              <router-link tag="li" :to="{name: 'blogs'}" class="m-nav-item circle">📖Blog</router-link>
               <li @click="changeTheme()" style="font-size:2em; cursor:help">{{emoji}}</li>
           </ul>
       </nav>
@@ -97,6 +97,10 @@ export default {
     line-height: 1.618;
     list-style: none;
     transition: background 500ms ease-in-out, color 1000ms ease-in-out, box-shadow 500ms ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
   }
   *::-webkit-scrollbar {
     width: 3px;
@@ -193,6 +197,7 @@ export default {
       inset -3px -6px 4px 1px var(--shadow-up);
     animation: shadowFadeIn 0.05s;
   }
+  
   @keyframes shadowFadeIn {
     0% {
       box-shadow: 0px -6px 10px 0px var(--shadow-up),
