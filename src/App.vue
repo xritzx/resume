@@ -8,7 +8,7 @@
               <router-link tag="li" :to="{name: 'about'}" class="m-nav-item circle">🧬Me</router-link>
               <router-link tag="li" :to="{name: 'projects'}" class="m-nav-item circle">💡Projects</router-link>
               <router-link tag="li" :to="{name: 'blogs'}" class="m-nav-item circle">📖Blog</router-link>
-              <li @click="changeTheme()" style="font-size:2em; cursor:help">{{emoji}}</li>
+              <li @click="changeTheme()" style="font-size:2em;" >{{emoji}}</li>
           </ul>
       </nav>
       <hr class="seperator" style="border: 1px solid var(--accent)">
@@ -46,6 +46,15 @@ export default {
       document.getElementById("main").classList.remove('light');
       document.getElementById("main").classList.add(theme);
     }
+
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => cursor.setAttribute("style", "top: "+(e.pageY - 25)+"px; left: "+(e.pageX - 25)+"px;"))
+    document.addEventListener('click', () => {
+          cursor.classList.add("expand");
+          setTimeout(() => {
+              cursor.classList.remove("expand");
+          }, 200)
+    })
   }
 }
 </script>
@@ -101,6 +110,7 @@ export default {
     -moz-user-select: -moz-none;
     -ms-user-select: none;
     user-select: none;
+    cursor: none;
   }
   *::-webkit-scrollbar {
     width: 3px;
@@ -129,7 +139,6 @@ export default {
 
   .m-nav-item {
     color: var(--text-color);
-    cursor: crosshair;
     font-size: 0.9em;
     padding: 1rem 1.618rem;
     display: flex;
@@ -197,7 +206,36 @@ export default {
       inset -3px -6px 4px 1px var(--shadow-up);
     animation: shadowFadeIn 0.05s;
   }
-  
+
+  .cursor {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: transparent;
+    z-index: 99;
+    fill: red;
+    pointer-events: none;
+    transform: scale(0.5);
+}
+
+.expand {
+    animation: beat .2s forwards;
+}
+
+@keyframes beat {
+    0% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+}
+
   @keyframes shadowFadeIn {
     0% {
       box-shadow: 0px -6px 10px 0px var(--shadow-up),

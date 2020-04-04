@@ -23,7 +23,7 @@
 
       <b-col lg=7 class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4">
         <h4><Typewriter text="Hey, Good to see you here !"/></h4>
-        <b-img rounded="circle" :src="this.avatar" fluid alt="Oh snap 💩, am not visible !"></b-img>
+        <b-img rounded="circle" :src="this.avatar" fluid center alt="Oh snap 💩, am not visible !"></b-img>
         <hr class="seperator">
         <p>{{ this.about }} </p>
       </b-col>

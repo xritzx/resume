@@ -1,7 +1,7 @@
 <template>
   <b-container>
-    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4 mx-1">
-        <b-col cols=12 lg=12><h4><Typewriter text="Blog Single 🔥"/></h4>
+    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 py-4 px-2 mx-1">
+        <b-col cols=12 lg=12><h4><Typewriter text="Blog 📬"/></h4>
         <hr class="seperator"></b-col>
 
         <b-col cols=12 lg=12>
@@ -12,12 +12,12 @@
             >
               <b-row no-gutters>
                 <b-col lg=12>
-                    <b-card-img :src="post.img" class="rounded-0 fit"></b-card-img>
+                    <b-img :src="post.img" fluid center alt="Oh snap 💩, blog image not visible !"></b-img>
                 </b-col>
                 <b-col lg=12>
                   <b-card-body :title="post.title">
                     <b-card-text>
-                      <small>{{ post.caption }}<br>{{ post.date }}</small>
+                      <small><vue-markdown :source="post.caption" @rendered="update" />{{ post.date }}</small>
                       <hr style="background: var(--accent)">
                         <vue-markdown :source="blog" @rendered="update" />
                     </b-card-text>
@@ -80,9 +80,9 @@ export default {
     width: 100%;
   }
   .fit{
-      max-width: 500px;
-      max-height: 200px;
-      min-height: 150px;
+      max-width: 640px;
+      max-height: 480px;
+      min-height: 240px;
       object-fit: scale-down;
   }
   .scoped-n-button{

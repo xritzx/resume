@@ -12,7 +12,7 @@
         </b-row>
         <b-row class="neumorphic m-3 round-edge m-lg-3 p-3 p-lg-3">
           <b-col lg=12 cols=12><hr>Languages #️⃣<hr style="background: var(--accent)"></b-col>
-          <b-col lg=12 class="tile mt-lg-2" cols=12 v-for="language of languages" :key="language" v-html="language">{{language}}</b-col>
+          <b-col lg=12 class="tile mt-lg-2" cols=12 v-for="language of languages" :key="language.name" v-html="language.name">{{language.name}} {{language.icon}}</b-col>
         </b-row>
       </b-col>
 

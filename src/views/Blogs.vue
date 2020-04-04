@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4 mx-1">
+    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 py-4 px-2 mx-1">
         <b-col cols=12 lg=12><h4><Typewriter text="Blogs 🔥"/></h4>
         <hr class="seperator"></b-col>
 
@@ -11,10 +11,11 @@
               style="max-width: 1000px; border:none; background:#00000000;"
             >
               <b-row no-gutters>
-                <b-col lg=6>
-                    <b-card-img :src="blog.img" class="rounded-0 fit"></b-card-img>
+                <b-col lg=6 class="mb-lg-3">
+                    <!-- <b-card-img :src="blog.img" class="rounded-0 fit"></b-card-img> -->
+                    <b-img :src="blog.img" fluid center alt="Oh snap 💩, blog image not visible !"></b-img>
                 </b-col>
-                <b-col lg=6 @click="visitPost(blog.id)">
+                <b-col lg=6  class="mb-3 mb-lg-3" @click="visitPost(blog.id)">
                   <b-card-body :title="blog.title" class="un scoped-n-button">
                     <b-card-text>
                       <hr style="background: var(--accent)">
