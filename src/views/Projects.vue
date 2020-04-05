@@ -45,7 +45,7 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4 mx-1">
+    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-0.5 pt-4 mx-1">
         <b-col cols=12 lg=12><h4><Typewriter text="Projects that are 🔥"/></h4>
         <hr class="seperator"></b-col>
         <b-col lg=6 cols=12 v-for="project of projects" :key="project.source">

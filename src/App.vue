@@ -34,6 +34,7 @@ export default {
         this.emoji=this.emoji=="🌚"?"🌝":"🌚";
         localStorage.setItem('emoji',this.emoji);
         localStorage.setItem('theme', this.emoji=="🌚"?'light':'dark');
+        this.$emit('theme');
       }
     },
   mounted(){
@@ -46,15 +47,6 @@ export default {
       document.getElementById("main").classList.remove('light');
       document.getElementById("main").classList.add(theme);
     }
-
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', e => cursor.setAttribute("style", "top: "+(e.pageY - 25)+"px; left: "+(e.pageX - 25)+"px;"))
-    document.addEventListener('click', () => {
-          cursor.classList.add("expand");
-          setTimeout(() => {
-              cursor.classList.remove("expand");
-          }, 200)
-    })
   }
 }
 </script>
@@ -106,14 +98,11 @@ export default {
     line-height: 1.618;
     list-style: none;
     transition: background 500ms ease-in-out, color 1000ms ease-in-out, box-shadow 500ms ease-in-out;
-    -webkit-user-select: none;
-    -moz-user-select: -moz-none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: none;
+   
   }
   *::-webkit-scrollbar {
     width: 3px;
+    height: 3px;
     background: var(--bg);
   }
 
@@ -125,7 +114,7 @@ export default {
   a{
     text-decoration: none;
   }
-  
+
   .m-nav{
       padding: 1em;
       background-color: var(--bg);
@@ -145,6 +134,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
+    cursor: pointer;
   }
   .m-navbar-nav {
     display: flex;
@@ -206,35 +196,6 @@ export default {
       inset -3px -6px 4px 1px var(--shadow-up);
     animation: shadowFadeIn 0.05s;
   }
-
-  .cursor {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    background: transparent;
-    z-index: 99;
-    fill: red;
-    pointer-events: none;
-    transform: scale(0.5);
-}
-
-.expand {
-    animation: beat .2s forwards;
-}
-
-@keyframes beat {
-    0% {
-        transform: scale(0.5);
-    }
-    50% {
-        transform: scale(1);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(0.5);
-        opacity: 1;
-    }
-}
 
   @keyframes shadowFadeIn {
     0% {

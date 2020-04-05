@@ -37,7 +37,13 @@ const routes = [
     name: 'blog',
     component: Blog,
     props: true
-  }
+  },
+  { 
+    path: '*',
+    component: Home,
+  },
+
+
 ]
 
 const router = new VueRouter({

@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 py-4 px-2 mx-1">
+    <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 py-4 px-1 mx-0.25" >
         <b-col cols=12 lg=12><h4><Typewriter text="Blog 📬"/></h4>
         <hr class="seperator"></b-col>
 
@@ -19,7 +19,7 @@
                     <b-card-text>
                       <small><vue-markdown :source="post.caption" @rendered="update" />{{ post.date }}</small>
                       <hr style="background: var(--accent)">
-                        <vue-markdown :source="blog" @rendered="update" />
+                        <vue-markdown :source="blog" @rendered="update"/>
                     </b-card-text>
                   </b-card-body>
                 </b-col>
@@ -36,7 +36,6 @@
 <script>
 import Typewriter from "../components/Typewriter"
 import Prism from "prismjs"
-import "prismjs/themes/prism-okaidia.css"
 import 'prismjs/components/prism-go.min'
 
 export default {
@@ -51,13 +50,19 @@ export default {
     }
   },
   created(){
-    this.blog=String(this.post.body).split(":::").join("\n")
-    console.log(this.blog)
+    fetch(this.post.url).then(res=>res.text()).then(data=>this.blog=data)
   },
   methods: {
     update() {
-      this.$nextTick(() => Prism.highlightAll())
-    }
+      this.$nextTick(() => {
+        if(localStorage.getItem('theme')=='light'){
+          import("prismjs/themes/prism.css").then(() => Prism.highlightAll())  
+        }
+        else{
+          import("prismjs/themes/prism-okaidia.css").then(() => Prism.highlightAll())
+        }      
+      })
+    },
   },
 }
 </script>

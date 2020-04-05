@@ -25,7 +25,7 @@
         <h4><Typewriter text="Hey, Good to see you here !"/></h4>
         <b-img rounded="circle" :src="this.avatar" fluid center alt="Oh snap 💩, am not visible !"></b-img>
         <hr class="seperator">
-        <p>{{ this.about }} </p>
+        <p>{{ this.about }}</p>
       </b-col>
 
     </b-row>
