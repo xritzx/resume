@@ -19,7 +19,7 @@
       <b-col lg=8 class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 p-4">
         <h4><Typewriter text="Glad to see you here ❣️"/></h4>
         <hr class="seperator">
-        <p> {{ this.home }}</p>
+        <vue-markdown :source="this.home"/>
       </b-col>
     
     </b-row>
