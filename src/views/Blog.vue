@@ -2,8 +2,8 @@
   <b-container>
     <b-row class="neumorphic round-edge p-lg-5 mt-lg-2 mt-2 py-4 px-1 mx-0.25" >
         <b-col cols=12 lg=12><h4><Typewriter text="Blog 📬"/></h4>
+        <h6><a style="text-decoration: none; color:var(--accent)" :href="link" :data-action="this.$route.query.page">📡 Share via WhatsApp</a></h6>
         <hr class="seperator"></b-col>
-
         <b-col cols=12 lg=12>
             <b-card
               no-body
@@ -44,17 +44,19 @@ import 'prismjs/components/prism-go.min'
 
 export default {
   name: 'Blog',
-  props: ['post', 'id'],
+  props: ['prop_post', 'id'],
   components: {
     Typewriter,
   },
   data(){
     return{
       blog: '',
+      post: ''
     }
   },
   created(){
-    if(this.post){
+    if(this.prop_post){
+      this.post = this.prop_post
       fetch(this.post.url).then(res=>res.text()).then(data=>this.blog=data)
     }else{
       const db = firebase.database();
@@ -83,6 +85,11 @@ export default {
       })
     },
   },
+  computed: {
+    link(){
+      return `whatsapp://send?text=${this.post.title}`
+    }
+  }
 }
 </script>
 

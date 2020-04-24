@@ -57,7 +57,7 @@ export default {
     },
     visitPost(id){
         console.log("Trigger");   
-        this.$router.push({name: 'blog', params: {id: id, post:this.blogs[id] }})
+        this.$router.push({name: 'blog', params: {id: id, prop_post:this.blogs[id] }})
     }
   },
   created(){
