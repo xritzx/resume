@@ -11,8 +11,11 @@
               style="max-width: 1000px; border:none; background:#00000000;"
             >
               <b-row no-gutters>
-                <b-col lg=12>
+                <b-col lg=12 v-if="post.img">
                     <b-img :src="post.img" fluid center alt="Oh snap 💩, blog image not visible !"></b-img>
+                </b-col>
+                <b-col lg=12 v-else>
+                    <b-img src="../assets/spongebob.png" fluid center alt="Oh snap 💩, spongebob has turned invisible !"></b-img>
                 </b-col>
                 <b-col lg=12>
                   <b-card-body :title="post.title">
@@ -36,11 +39,12 @@
 <script>
 import Typewriter from "../components/Typewriter"
 import Prism from "prismjs"
+import firebase from 'firebase/app'
 import 'prismjs/components/prism-go.min'
 
 export default {
   name: 'Blog',
-  props: ['post'],
+  props: ['post', 'id'],
   components: {
     Typewriter,
   },
@@ -50,7 +54,22 @@ export default {
     }
   },
   created(){
-    fetch(this.post.url).then(res=>res.text()).then(data=>this.blog=data)
+    if(this.post){
+      fetch(this.post.url).then(res=>res.text()).then(data=>this.blog=data)
+    }else{
+      const db = firebase.database();
+      db.ref(`/blog/${this.id}`).once('value')
+        .then(snapshot => {
+          if(snapshot.val()){
+            this.post = snapshot.val();
+          }else{
+            this.post = {
+              title : "Okay, Cool! You are smart 😎 now move on smartypants!",
+            };
+          }
+        })
+        .then(()=>fetch(this.post.url).then(res=>res.text()).then(data=>this.blog=data))
+    }
   },
   methods: {
     update() {

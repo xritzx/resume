@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import Typewriter from "../components/Typewriter"
+import Typewriter from '../components/Typewriter'
 import firebase from 'firebase/app'
-import Prism from "prismjs"
-import "prismjs/themes/prism-okaidia.css"
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-okaidia.css'
 import 'prismjs/components/prism-go.min'
 
 export default {
