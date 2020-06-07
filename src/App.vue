@@ -68,7 +68,7 @@ export default {
      --shadow-up-dark: #2d2d2dda;
      --shadow-down-dark: #000000da;
      
-     --accent: #FFAA22;
+     --accent: #62BD69;
      --b-radius : 1.3em;
 
   }
